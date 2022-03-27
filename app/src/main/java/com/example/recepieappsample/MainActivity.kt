@@ -8,10 +8,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.Button
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Surface
-import androidx.compose.material.Text
+import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -49,24 +46,43 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier
                         .padding(16.dp)
                         .fillMaxWidth(),
-                    horizontalAlignment = Alignment.End
+                    horizontalAlignment = Alignment.End,
                 ) {
-                    Text(
-                        text = "پکیج رنسانس",
-                        style = Typography.h5
-                    )
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.SpaceBetween,
+                    ) {
+                        Text(
+                            text = "125,000 تومان",
+                            fontSize = 17.sp,
+                            color = Color(0xff85bb65),
+                            modifier = Modifier.align(Alignment.CenterVertically)
+                        )
+
+                        Text(
+                            text = "پکیج رنسانس",
+                            style = Typography.h5
+                        )
+                    }
                     Spacer(modifier = Modifier.padding(top = 10.dp))
                     Text(
                         text = "808 کالری",
                         style = Typography.body2
                     )
                     Spacer(modifier = Modifier.padding(top = 10.dp))
-                    Text(
-                        text = "125,000 تومان",
-                        fontSize = 17.sp,
-                        color = Color(0xff85bb65)
-                    )
-                    Spacer(modifier = Modifier.padding(top = 10.dp))
+                    Button(
+                        onClick = {},
+                        modifier = Modifier
+                            .padding(16.dp)
+                            .fillMaxWidth()
+                            .align(Alignment.CenterHorizontally),
+                        colors = ButtonDefaults.buttonColors(backgroundColor = Color.Red)
+                    ) {
+                        Text(text = "سفارش",
+                            color = Color.White,
+                            style = Typography.h6
+                        )
+                    }
                 }
             }
         }
