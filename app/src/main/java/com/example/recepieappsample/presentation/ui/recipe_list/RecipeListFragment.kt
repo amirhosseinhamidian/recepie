@@ -9,14 +9,16 @@ import android.view.ViewGroup
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Surface
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.unit.dp
 import androidx.fragment.app.viewModels
-import com.example.recepieappsample.presentation.component.CircularIndeterminateProgressBar
-import com.example.recepieappsample.presentation.component.RecipeCard
-import com.example.recepieappsample.presentation.component.SearchAppBar
+import com.example.recepieappsample.presentation.component.*
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -44,24 +46,30 @@ class RecipeListFragment : Fragment() {
                         onSelectedCategoryChange = viewModel::onSelectedCategoryChange,
                         onChangeCategoryScrollPosition = viewModel::onChangeCategoryScrollPosition
                     )
+
                     Box(
                         modifier = Modifier.fillMaxSize()
                     ) {
-                        LazyColumn(
-                            contentPadding = PaddingValues(
-                                horizontal = 16.dp,
-                                vertical = 8.dp
-                            )
-                        ) {
-                            items(
-                                items = recipes,
-                                itemContent = {
-                                    RecipeCard(recipe = it) {
+                        if (loading) {
+                            LoadingRecipeListShimmer(imageHeight = 260.dp)
+                        }else{
+                            LazyColumn(
+                                contentPadding = PaddingValues(
+                                    horizontal = 16.dp,
+                                    vertical = 8.dp
+                                )
+                            ) {
+                                items(
+                                    items = recipes,
+                                    itemContent = {
+                                        RecipeCard(recipe = it) {
+                                        }
                                     }
-                                }
-                            )
+                                )
+                            }
+                            CircularIndeterminateProgressBar(isDisplayed = loading)
                         }
-                        CircularIndeterminateProgressBar(isDisplayed = loading)
+
                     }
                 }
             }
